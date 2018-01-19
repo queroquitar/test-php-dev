@@ -23,7 +23,7 @@ class DebtController extends Controller
     }
 
     /**
-     * @api {get} api/debt/id debt
+     * @api {get} api/debt/id get
      * @apiName get
      * @apiGroup Debts
      *
@@ -40,7 +40,7 @@ class DebtController extends Controller
 
 
     /**
-     * @api {get} api/debt/delete/id debt
+     * @api {get} api/debt/delete/id delete
      * @apiName delete
      * @apiGroup Debts
      *
@@ -57,7 +57,7 @@ class DebtController extends Controller
 
 
     /**
-     * @api {post} api/debt/save debt
+     * @api {post} api/debt/save save
      * @apiName save
      * @apiGroup Debts
      *
@@ -91,7 +91,7 @@ class DebtController extends Controller
     }
 
     /**
-     * @api {post} api/debt/update/id debt
+     * @api {post} api/debt/update/id update
      * @apiName update
      * @apiGroup Debts
      *

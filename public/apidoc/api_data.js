@@ -25,7 +25,7 @@ define({ "api": [
   {
     "type": "get",
     "url": "api/debt/delete/id",
-    "title": "debt",
+    "title": "delete",
     "name": "delete",
     "group": "Debts",
     "parameter": {
@@ -61,7 +61,7 @@ define({ "api": [
   {
     "type": "get",
     "url": "api/debt/id",
-    "title": "debt",
+    "title": "get",
     "name": "get",
     "group": "Debts",
     "parameter": {
@@ -97,7 +97,7 @@ define({ "api": [
   {
     "type": "post",
     "url": "api/debt/save",
-    "title": "debt",
+    "title": "save",
     "name": "save",
     "group": "Debts",
     "parameter": {
@@ -140,7 +140,7 @@ define({ "api": [
   {
     "type": "post",
     "url": "api/debt/update/id",
-    "title": "debt",
+    "title": "update",
     "name": "update",
     "group": "Debts",
     "parameter": {
