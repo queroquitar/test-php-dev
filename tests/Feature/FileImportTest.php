@@ -13,7 +13,7 @@ use Symfony\Component\Console\Application as ConsoleApplication;
 
 class FileImportTest extends TestCase
 {
-   
+
     /**
      * Teste de importação de dados para o mongodb, recebe o caminho do arquivo como paramentro.
      *
@@ -21,7 +21,7 @@ class FileImportTest extends TestCase
      */
     public function testThrownExpectionReadFileInsertMongo()
     {
-        
+
         $application = new ConsoleApplication();
 
         $testedCommand = $this->app->make(ReadFileInsertMongo::class);
@@ -38,6 +38,6 @@ class FileImportTest extends TestCase
         ]);
 
         $this->assertRegExp('/Importação concluida!/', $commandTester->getDisplay());
-     
+
     }
 }

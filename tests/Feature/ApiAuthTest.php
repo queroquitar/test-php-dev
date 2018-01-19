@@ -23,7 +23,7 @@ class ApiAuthTest extends TestCase
             'password' => 'adminqueroquitar',
             'password_confirmation' => 'adminqueroquitar',
         ];
-      
+
         $response = $this->call('POST', 'api/register', $user);
 
         $data = json_decode($response->content());
@@ -40,12 +40,12 @@ class ApiAuthTest extends TestCase
      */
     public function testUserLogin()
     {
-        
+
         $user = [
             'email' => 'admin@queroquitar.com.br',
             'password' => 'adminqueroquitar',
         ];
-      
+
         $response = $this->call('POST', 'api/login', $user);
 
         $data = json_decode($response->content());
@@ -55,7 +55,7 @@ class ApiAuthTest extends TestCase
         if ($data->success) {
             $this->token = $data->data->token;
         }
-       
+
     }
 
     /**

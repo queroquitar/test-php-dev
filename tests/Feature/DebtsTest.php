@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class DebtsTest extends TestCase
 {
-   
+
     /**
      * Testando o login do usuário.
      *
@@ -21,7 +21,7 @@ class DebtsTest extends TestCase
             'email' => 'admin@queroquitar.com.br',
             'password' => 'adminqueroquitar',
         ];
-      
+
         $response = $this->call('POST', 'api/login', $user);
 
         $data = json_decode($response->content());
@@ -31,7 +31,7 @@ class DebtsTest extends TestCase
         }
 
         return $token;
-       
+
     }
 
 
@@ -40,7 +40,7 @@ class DebtsTest extends TestCase
      *
      * @return void
      */
-    public function testMustInsertDebt() 
+    public function testMustInsertDebt()
     {
 
         $token = $this->login();
@@ -51,8 +51,8 @@ class DebtsTest extends TestCase
             'value' => 'R$ 1000,00',
             'phone' => '1195723-1563'
         ];
-      
-        $url =  'api/debt/save?token='.$token;
+
+        $url = 'api/debt/save?token=' . $token;
         $response = $this->call('POST', $url, $debt);
 
         $data = json_decode($response->content());
@@ -63,18 +63,17 @@ class DebtsTest extends TestCase
     }
 
 
-
     /**
      * Mostrando todos os debitos.
      *
      * @return void
      */
-    public function testMustShowAllDebts() 
+    public function testMustShowAllDebts()
     {
 
         $token = $this->login();
-      
-        $url =  'api/debts/all?token='.$token;
+
+        $url = 'api/debts/all?token=' . $token;
         $response = $this->call('GET', $url);
         $data = json_decode($response->content());
 
@@ -88,14 +87,14 @@ class DebtsTest extends TestCase
      *
      * @return void
      */
-    public function testMustUpdateDebt() 
+    public function testMustUpdateDebt()
     {
 
         $token = $this->login();
 
         $id = Debt::first()->id;
 
-   
+
         $debt = [
             'name' => 'Conta 2',
             'date' => '19/01/2018',
@@ -103,7 +102,7 @@ class DebtsTest extends TestCase
             'phone' => '1195723-1563'
         ];
 
-        $url =  'api/debt/update/'.$id.'/?token='.$token;
+        $url = 'api/debt/update/' . $id . '/?token=' . $token;
         $response = $this->call('POST', $url, $debt);
         $data = json_decode($response->content());
 
