@@ -15,7 +15,7 @@ class FileImportTest extends TestCase
 {
    
     /**
-     * A basic test example.
+     * Teste de importação de dados para o mongodb, recebe o caminho do arquivo como paramentro.
      *
      * @return void
      */
