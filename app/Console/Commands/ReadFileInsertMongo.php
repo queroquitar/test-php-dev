@@ -90,8 +90,6 @@ class ReadFileInsertMongo extends Command
      */
     protected function importData($filePath)
     {
-
-        $fileData = [];
         $file = fopen($filePath, 'r');
         while (($line = fgetcsv($file)) !== false) {
             $debt = new Debt;
