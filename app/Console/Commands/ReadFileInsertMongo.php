@@ -16,7 +16,7 @@ class ReadFileInsertMongo extends Command
 
 
     /**
-     * Type of allowed extensions.
+     * Tipos de extensão permitidas.
      *
      * @var string
      */
@@ -58,11 +58,21 @@ class ReadFileInsertMongo extends Command
 
     }
 
+    /**
+     * Serve para garantir que o caminho do arquivo será lido em utf8.
+     * @param $argument
+     * @return string
+     */
     protected function useUtf8Encoding($argument)
     {
         return iconv(mb_detect_encoding($argument, mb_detect_order(), true), "UTF-8", $argument);
     }
 
+    /**
+     * Recebe o arquivo e verifica se a extensão dele é valida.
+     * @param $filePath
+     * @return bool
+     */
     protected function verifyExtensionFile($filePath)
     {
         $fileExtension = pathinfo($filePath, PATHINFO_EXTENSION);
@@ -73,6 +83,11 @@ class ReadFileInsertMongo extends Command
         return false;
     }
 
+    /**
+     * Recebe o caminho do arquivo e importa os dados dos debitos.
+     * @param $filePath
+     * @return bool
+     */
     protected function importData($filePath)
     {
 
