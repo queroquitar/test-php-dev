@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 
 use JWTAuth;
 use App\User;
-use DB, Hash, Validator;
+use Hash, Validator;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Support\Facades\Password;

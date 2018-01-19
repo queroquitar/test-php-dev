@@ -5,6 +5,9 @@ namespace App\Console\Commands;
 use App\Debt;
 use Illuminate\Console\Command;
 
+/**
+ *  Classe que ler um arquivo e insere os dados em uma database mongodb.
+ */
 class ReadFileInsertMongo extends Command
 {
     /**
@@ -84,7 +87,7 @@ class ReadFileInsertMongo extends Command
     }
 
     /**
-     * Recebe o caminho do arquivo e importa os dados dos debitos.
+     * Recebe o caminho do arquivo e importa os dados dos debitos, conforme o formato padrão.
      * @param $filePath
      * @return bool
      */

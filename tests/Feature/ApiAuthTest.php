@@ -10,9 +10,6 @@ use Artisan;
 
 class ApiAuthTest extends TestCase
 {
-
-    protected $token;
-
     /**
      * Testando a criação de usuário.
      *
@@ -72,6 +69,6 @@ class ApiAuthTest extends TestCase
         $data = json_decode($response->content());
         $this->assertEquals('token_not_provided', $data->error);
     }
-    
+
 
 }
