@@ -13,15 +13,13 @@ use Illuminate\Http\Request;
 |
 */
 
-
 Route::group(['middleware' => 'jwt.auth'], function() {
     Route::resource('users', 'api\Users\UsersController');
+    Route::resource('contents', 'api\Contents\ContentsController');
 });
 
-/*
-Route::group(['middleware' => 'api'], function() {
-    Route::resource('users', 'api\Users\UsersController');
+Route::group(['middleware' => ['api', 'cors']], function() {
     Route::post('users/register', 'api\Users\UsersController@register');
     Route::post('users/login', 'api\Users\UsersController@login');
+    Route::post('users', 'api\Users\UsersController@store');
 });
-*/

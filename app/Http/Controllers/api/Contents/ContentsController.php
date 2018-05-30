@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\api\Users;
+namespace App\Http\Controllers\api\Contents;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -13,13 +13,13 @@ use JWTFactory;
 use JWTAuth;
 use Response;
 
-use App\User;
+use App\Models\Content;
 
-class UsersController extends Controller
+class ContentsController extends Controller
 {
     protected $mainModel;
 
-    public function __construct(User $mainModel)
+    public function __construct(Content $mainModel)
     {
         $this->mainModel = $mainModel;
     }
@@ -31,10 +31,10 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = $this->mainModel->newQuery()->get();
+        $contents = $this->mainModel->newQuery()->get();
 
-        if($users->count()) {
-            return response()->json(APIHelper::returnSuccess($users), 200);
+        if($contents->count()) {
+            return response()->json(APIHelper::returnSuccess($contents), 200);
         } else {
             return response()->json(APIHelper::returnNotFound('Nenhuma usuário encontrada'), 404);
         }

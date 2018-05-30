@@ -15,4 +15,16 @@ class Helper{
 
         return null;
     }
+
+    public static function formatFormErrorMsg($messages){
+        $msg = '';
+
+        foreach ($messages as $message){
+            foreach ($message as $key => $value){
+                $msg .= $value . '<br>';
+            }
+        }
+
+        return $msg;
+    }
 }
