@@ -145,5 +145,13 @@ class ContentsController extends Controller
      */
     public function destroy($id)
     {
+        $content = $this->mainModel->newQuery()->where('id', $id)->first();
+
+        if($content->delete()){
+            return response()->json(APIHelper::returnSuccess('Conteúdo removido'), 200);
+        }
+        else{
+            return response()->json(APIHelper::returnNotFound('Conteúdo não removido'), 404);
+        }
     }
 }

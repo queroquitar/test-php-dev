@@ -1,22 +1,15 @@
-# Challenge
-- Criar uma app command line, em Laravel, que leia os arquivos passados e adicione os valores em uma base mongodb
-- Criar uma api usando Laravel, conectando mongodb e mysql e implementar o CRUD de usuário.
-- Implementar login de usuário e usar jwtwebtoken (livre pra alterar o schema passado ou adicionar 
-tabelas auxiliares se achar necessário). 
-- Criar endpoints para consumir os dados importados na tarefa de command line 
-- Criar endpoints para CRUD dessesdados na api.
-- Implementar uma camada web que consuma essa api. 
+# Instalação
+- Clone o repósitorio
+- Execute "composer install"
+- Configure o arquivo .env com os acessos ao banco mySql
+- Adicione a variável API_HOST no .env com o valor do HOST da API (ex: http://127.0.0.1:8888/api/)
+- Execute as migrations "php artisan migrate:refresh"
+- Suba um servidor para camada web "php artisan serve"
+- Suba um servidor para API com a mesma porta que configuramos no .env "php artisan serve --port 8888"
+- Navegue em http://127.0.0.1:8000
 
-## User Schema
-    email: 
-      - type: string 
-      - required: true
-      - minlength: 5
-    password: 
-      - type: string 
-      - required: true
-      - minlength: 6
+# Command Line (Processador de arquivos XML)
+- Execute "php artisan import:xml <filePath>" (Ex: php artisan import:xml /Users/Usuario/Desktop/arquivo.xml) 
 
-# Extras 
-- Tests 
-- Docker 
+# DOc API
+- https://documenter.getpostman.com/view/1134303/test-php-dev/RW8Dn7m1
