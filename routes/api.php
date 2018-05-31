@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Http\Request;
 
 /*
@@ -13,7 +12,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group(['middleware' => 'jwt.auth'], function() {
+Route::group(['middleware' => ['jwt.auth', 'cors']], function() {
     Route::resource('users', 'api\Users\UsersController');
     Route::resource('contents', 'api\Contents\ContentsController');
 });

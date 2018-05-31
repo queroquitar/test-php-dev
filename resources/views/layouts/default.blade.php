@@ -5,9 +5,16 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        @if(!Auth::guest())
+            <meta name="api-host" content="{{ env('API_HOST') }}">
+            <meta name="jwt-token" content="{{ Auth::user()->jwt }}">
+        @endif
+
         <title>Laravel</title>
 
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+        @yield('css')
     </head>
     <body>
         <div class="container">
@@ -25,4 +32,6 @@
     </body>
 
     <script src="{{ asset('js/app.js') }}"></script>
+
+    @yield('js')
 </html>

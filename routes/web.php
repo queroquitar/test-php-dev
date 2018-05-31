@@ -12,10 +12,9 @@
 */
 
 Route::get('/', function () {
-    return view('home');
+    return redirect('home');
 });
 
-Route::get('home', 'HomeController@index')->name('home.index');
 Route::get('users/login', 'UsersController@login')->name('users.login');
 Route::get('users/logout', 'UsersController@logout')->name('users.logout');
 Route::get('login', 'UsersController@login')->name('login');
@@ -25,7 +24,8 @@ Route::post('users/store', 'UsersController@store')->name('users.store');
 
 Route::group(['middleware' => 'auth'], function() {
     Route::resource('home', 'HomeController');
-    Route::resource('contacts', 'ContactsController');
+    Route::resource('contents', 'ContentsController');
+    Route::get('/contents/destroy/{id}', 'ContentsController@destroy')->name('contents.destroy');
     Route::get('users/{id}/edit', 'UsersController@edit')->name('users.edit');
     Route::put('users/{id}', 'UsersController@update')->name('users.update');
 });

@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\Helper;
 use Illuminate\Http\Request;
+use App\Helpers\Helper;
 use Ixudra\Curl\Facades\Curl;
-use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+
+use App\User;
 
 class UsersController extends Controller
 {
@@ -47,12 +48,12 @@ class UsersController extends Controller
                 return redirect()->intended('home');
             }
             else{
-                $request->session()->flash('status', 'Task was successful!');
+                $request->session()->flash('alert-danger', 'Usuário e Senha inválidos');
                 return back()->withInput();
             }
         }
         else{
-            $request->session()->flash('status', 'Task was successful!');
+            $request->session()->flash('alert-danger', 'Usuário e Senha inválidos');
             return back()->withInput();
         }
     }

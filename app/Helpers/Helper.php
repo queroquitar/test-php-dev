@@ -27,4 +27,12 @@ class Helper{
 
         return $msg;
     }
+
+    public static function castFloatToReal($value){
+        if(is_numeric($value) && $value > 0) {
+            return number_format($value, 2, ',', '.');
+        }
+
+        return null;
+    }
 }

@@ -9,13 +9,14 @@
         <title>Laravel</title>
 
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
     </head>
     <body>
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-md-12">
 
-                    <div class="card">
+                    <div class="card card-login">
                         <div class="card-header">
                             Login
                         </div>

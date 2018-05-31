@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api\Contents;
 
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Helpers\APIHelper;
 use Illuminate\Support\Facades\Hash;
@@ -36,7 +37,7 @@ class ContentsController extends Controller
         if($contents->count()) {
             return response()->json(APIHelper::returnSuccess($contents), 200);
         } else {
-            return response()->json(APIHelper::returnNotFound('Nenhuma usuário encontrada'), 404);
+            return response()->json(APIHelper::returnNotFound('Nenhuma contato encontrada'), 404);
         }
     }
 
@@ -49,91 +50,30 @@ class ContentsController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), array(
-            'email' => 'email|required|min:5|unique:users,email,NULL,id',
-            'password' => 'required|min:6'
+            'cod' => 'required',
+            'name' => 'required',
+            'date' => 'required',
+            'cost' => 'required'
         ));
 
         if(!$validator->fails()){
-            $user = $this->mainModel->newInstance();
-            $user->email = $request->input('email');
-            $user->password = Hash::make($request->input('password'));
+            $content = $this->mainModel->newInstance();
 
-            if($user->save()) {
-                return response()->json(APIHelper::returnSuccess($user), 200);
+            $content->cod = $request->input('cod');
+            $content->name = $request->input('name');
+            $content->date = $request->input('date');
+            $content->cost = $request->input('cost');
+
+            if ($content->save()) {
+                return response()->json(APIHelper::returnSuccess($content), 200);
+            } else {
+                return response()->json(APIHelper::returnError('Erro ao salvar conteúdo'), 404);
             }
-            else{
-                return response()->json(APIHelper::returnError('Erro ao salvar usuário'), 404);
-            }
+
         }
         else{
             return response()->json(APIHelper::returnNotSaved($validator->errors()->toArray()), 404);
         }
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function register(Request $request)
-    {
-        $validator = Validator::make($request->all(), array(
-            'email' => 'email|required|min:5|unique:users,email,NULL,id',
-            'password' => 'required|min:6'
-        ));
-
-        if(!$validator->fails()){
-            $user = $this->mainModel->newInstance();
-            $user->email = $request->input('email');
-            $user->password = Hash::make($request->input('password'));
-
-            if($user->save()) {
-                $token = JWTAuth::fromUser($user);
-                return response()->json(APIHelper::returnSuccess(compact('token')), 200);
-            }
-            else{
-                return response()->json(APIHelper::returnError('Erro ao salvar usuário'), 404);
-            }
-        }
-        else{
-            return response()->json(APIHelper::returnNotSaved($validator->errors()->toArray()), 404);
-        }
-    }
-
-    /**
-     * Login
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function login(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|string|email|max:255',
-            'password'=> 'required'
-        ]);
-        if ($validator->fails()) {
-            return response()->json($validator->errors());
-        }
-        $credentials = $request->only('email', 'password');
-        try {
-            if (! $token = JWTAuth::attempt($credentials)) {
-                return response()->json(APIHelper::returnNotFound('Credenciais inválidas'), 401);
-            }
-        } catch (JWTException $e) {
-            return response()->json(APIHelper::returnNotFound('Credenciais inválidas'), 500);
-        }
-        return response()->json(compact('token'));
-    }
-
-    /**
-     * Get the authenticated User.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function me()
-    {
-        return response()->json(APIHelper::returnSuccess(Auth::user()), 200);
     }
 
     /**
@@ -144,17 +84,17 @@ class ContentsController extends Controller
      */
     public function show($id)
     {
-        $user = $this->mainModel->newQuery()
+        $content = $this->mainModel->newQuery()
             ->find($id);
 
-        if($user){
-            return response()->json(APIHelper::returnSuccess($user), 200);
+        if($content){
+            return response()->json(APIHelper::returnSuccess($content), 200);
         }
         else{
-            return response()->json(APIHelper::returnNotFound('Usuário não encontrada'), 404);
+            return response()->json(APIHelper::returnNotFound('Conteúdo não encontrada'), 404);
         }
 
-        return response()->json(APIHelper::returnSuccess($user), 200);
+        return response()->json(APIHelper::returnSuccess($content), 200);
     }
 
     /**
@@ -167,25 +107,29 @@ class ContentsController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), array(
-            'email' => 'email|required|min:5|unique:users,email,'.$id,
+            'cod' => 'required',
+            'name' => 'required',
+            'date' => 'required',
+            'cost' => 'required'
         ));
 
         if(!$validator->fails()){
-            $user = $this->mainModel->newQuery()->where('id', $id)->first();
+            $content = $this->mainModel->newQuery()->where('id', $id)->first();
 
-            if($user) {
-                $user->id = $id;
-                $user->email = $request->input('email');
-                $user->password = Hash::make($request->input('password'));
+            if($content) {
+                $content->cod = $request->input('cod');
+                $content->name = $request->input('name');
+                $content->date = $request->input('date');
+                $content->cost = $request->input('cost');
 
-                if ($user->save()) {
-                    return response()->json(APIHelper::returnSuccess($user), 200);
+                if ($content->save()) {
+                    return response()->json(APIHelper::returnSuccess($content), 200);
                 } else {
-                    return response()->json(APIHelper::returnError('Erro ao salvar usuário'), 404);
+                    return response()->json(APIHelper::returnError('Erro ao salvar conteúdo'), 404);
                 }
             }
             else{
-                return response()->json(APIHelper::returnNotFound('Usuário não encontrada'), 404);
+                return response()->json(APIHelper::returnNotFound('Conteúdo não encontrada'), 404);
             }
         }
         else{
@@ -201,6 +145,5 @@ class ContentsController extends Controller
      */
     public function destroy($id)
     {
-
     }
 }
